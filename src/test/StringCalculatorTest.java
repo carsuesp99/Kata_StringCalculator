@@ -39,7 +39,7 @@ public class StringCalculatorTest {
     public void string_have_different_delimiters(){
 
         stringCalculator = new StringCalculator();
-        Assert.assertEquals(5, stringCalculator.calculate("//;\n3,1\n1"));
+        Assert.assertEquals(5, stringCalculator.calculate("//;\n3;1;1"));
     }
 
     @Test
