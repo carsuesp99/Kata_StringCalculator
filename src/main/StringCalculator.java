@@ -27,7 +27,9 @@ public class StringCalculator {
                 String[] numbers = expression.split("[,:\\n]");
                 for(String number: numbers){
                     int numeroParseado = Integer.parseInt(number);
-                    if(numeroParseado > 1000){
+                    if(numeroParseado < 0){
+                        throw new RuntimeException("Negatives not allowed. " + numeroParseado);
+                    } else if(numeroParseado > 1000){
                         numeroParseado = 0;
                     }else{
                         result += numeroParseado;

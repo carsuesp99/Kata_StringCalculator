@@ -53,7 +53,8 @@ public class StringCalculatorTest {
     public void should_throw_exception_for_negative_numbers(){
 
         stringCalculator = new StringCalculator();
-        Assert.assertEquals("Negatives not allowed.", stringCalculator.calculate("-1"));
+        Throwable exception = Assert.assertThrows(RuntimeException.class, () -> stringCalculator.calculate("1,3\n-2"));
+        Assert.assertEquals(exception.getMessage(), "Negatives not allowed. -2");
     }
 
 }
