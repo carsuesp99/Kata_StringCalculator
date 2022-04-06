@@ -10,34 +10,37 @@ public class StringCalculator {
 
             int result = 0;
 
-            if(expression.startsWith("//")){
+            String[] numbers = getSplit(expression);
 
-                Matcher matcher = Pattern.compile("//(.)\n(.*)").matcher(expression);
-                if(matcher.matches()){
-                    String delimiter = matcher.group(1);
-                    String toSplit = matcher.group(2);
-                    String[] numbers = toSplit.split(delimiter);
-                    for(String number: numbers){
-                        result += Integer.parseInt(number);
-                    }
-                    return result;
-                }
+            for(String number: numbers){
 
-            }else{
-                String[] numbers = expression.split("[,:\\n]");
-                for(String number: numbers){
-                    int numeroParseado = Integer.parseInt(number);
-                    if(numeroParseado < 0){
-                        throw new RuntimeException("Negatives not allowed. " + numeroParseado);
-                    } else if(numeroParseado > 1000){
-                        numeroParseado = 0;
-                    }else{
-                        result += numeroParseado;
-                    }
+                int numeroParseado = Integer.parseInt(number);
+
+                if(numeroParseado < 0){
+                    throw new RuntimeException("Negatives not allowed. " + numeroParseado);
                 }
-                return result;
+                if(numeroParseado > 1000){
+                    numeroParseado = 0;
+                }else{
+                    result += numeroParseado;
+                }
             }
+            return result;
         }
         return 0;
+    }
+
+
+    public String[] getSplit(String expression){
+
+        if(expression.startsWith("//")) {
+            Matcher matcher = Pattern.compile("//(.)\n(.*)").matcher(expression);
+            if (matcher.matches()) {
+                String delimiter = matcher.group(1);
+                String toSplit = matcher.group(2);
+                return toSplit.split(delimiter);
+            }
+        }
+        return  expression.split("[,:\\n]");
     }
 }

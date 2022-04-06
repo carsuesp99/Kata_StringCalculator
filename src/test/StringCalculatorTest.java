@@ -29,7 +29,7 @@ public class StringCalculatorTest {
     }
 
     @Test
-    public void if_there_are_new_lines_instead_of_commas(){
+    public void new_lines_instead_of_commas(){
 
         stringCalculator = new StringCalculator();
         Assert.assertEquals(7, stringCalculator.calculate("3\n2,1\n1"));
